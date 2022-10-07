@@ -30,6 +30,16 @@ flask run
 ```
 
 ## Run gRPC backend
+Install envoy proxy
+```
+https://www.envoyproxy.io/docs/envoy/latest/start/install
+```
+
+Run envoy proxy
+```
+envoy --config-path envoy.yaml
+```
+Run gRPC app
 ```
 python grpc_server.py
 ```
@@ -57,3 +67,15 @@ npx webpack client.js
 ```
 
 Open file test.html with browser and test with file data.json
+
+
+# Test performance with locust
+Install locust
+```
+pipenv install locust
+```
+
+Run locust
+```
+locust -f locustfile.py
+```

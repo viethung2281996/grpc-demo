@@ -65,23 +65,23 @@ class MyUser(FastHttpUser):
     channel = grpc.insecure_channel('127.0.0.1:50051', compression=grpc.Compression.Gzip)
 
     @task
-    # @stopwatch
+    @stopwatch
     def decompress_api(self):
-        return self.send_rest_api_with_protobuf_base64()
+        return self.send_grpc_with_protobuf()
 
     def send_rest_api_with_json(self):
         response = requests.post('http://localhost:5000/api/test', json=data, headers={'Connection': 'close'})
         response.close()
         return int(response.headers['Content-Length'])
 
-    def send_rest_api_with_compressed_data(self):
-        res = requests.get(
-            f'http://localhost:5000/api/decompress?type={file_compression}',
-            data=file_data,
-            headers={'Connection': 'close'}
-        )
-        res.close()
-        return int(res.headers['Content-Length'])
+    # def send_rest_api_with_compressed_data(self):
+    #     res = requests.get(
+    #         f'http://localhost:5000/api/decompress?type={file_compression}',
+    #         data=file_data,
+    #         headers={'Connection': 'close'}
+    #     )
+    #     res.close()
+    #     return int(res.headers['Content-Length'])
 
     def send_grpc_with_protobuf(self):
         stub = user_tracking_pb2_grpc.DeviceServiceStub(self.channel)
@@ -133,9 +133,9 @@ class MyUser(FastHttpUser):
                                     data=data,
                                     headers=headers)
 
-    def test_with_grpc_gateway(self):
-        client = httpx.AsyncClient(http2=True)
-        response = client.post('http://localhost:8000/',
-                               json=data)
+    # def test_with_grpc_gateway(self):
+    #     client = httpx.AsyncClient(http2=True)
+    #     response = client.post('http://localhost:8000/',
+    #                            json=data)
         # response.close()
         # return len(response._content)
