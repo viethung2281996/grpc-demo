@@ -1,0 +1,66 @@
+- code test lại bằng js, test trên chrome, 
+- thử zstd
+- thử code full luồng với kafka, set compress config -> comsumer, check xem phải cấu hình gì thêm không.
+
+# Test with python
+- zstd - level 1
+compress length
+19915
+compress speed
+[0.5456282090162858, 0.5455337499734014, 0.5449844159884378]
+decompress speed 
+[0.3097881249850616, 0.3101452080300078, 0.30986579100135714]
+
+- snappy
+
+compress length
+39546
+compress speed
+[0.544442499987781, 0.5415459579089656, 0.5417307079769671]
+decompress speed
+[0.30057349998969585, 0.3011225829832256, 0.3032534159719944]
+
+- gzip
+
+compress length
+21078
+compress speed
+[2.410195125034079, 2.404530290979892, 2.394895208068192]
+decompress speed
+[0.16862541693262756, 0.17662341694813222, 0.1745670000091195]
+
+- zlib
+
+compress length
+21078
+compress speed
+[1.4494933749992924, 1.4446296250007435, 1.459665334001329]
+decompress speed
+[0.15975041699857684, 0.1607486249995418, 0.1598649169991404]
+
+- kafka
+Normally compression type of topic is set with producer, but can custom 
+
+Send direct compressed value from producer to topic
++ Set compresstion type(zstd, snappy, gzip, ...) for topic
++ Set uncompress for producer and send bytes value to topic
+
+-> producer can send direct message without compression to topic 
+
+protobuf vs json
+grpc vs rest api
+
+
+
+21/10
+- Tìm hiểu thêm thằng proxy, scale như nào
+- Tối ưu biên dịch cho client
+-
+
+
+- grpc web + envoy 
+- gRPC gateway
+- http2
+clear
+
+protoc -I src/grpc/protobufs user_tracking.proto  --js_out=import_style=commonjs:.  --grpc-web_out=import_style=commonjs,mode=grpcwebtext:.

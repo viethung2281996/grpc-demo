@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  # flask:
+  #   image: compress_app:latest
+  #   entrypoint: bin/start_app.sh
+  #   ports:
+  #       - "5000:5000"
+  #   environment:
+  #       FLASK_APP: app
+  #       FLASK_ENV: product
+  #       ENV_PREFIX_FOR_DYNACONF: product
+  #       WORKERS: 3
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.1'
+  #         memory: 500M
+
+  grpc_app:
+    image: grpc_app:latest
+    entrypoint: bin/start_grpc.sh
+    ports:
+        - "50051:50051"
+
+  envoy:
+    image: envoyproxy/envoy:v1.23-latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml

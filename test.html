@@ -1,0 +1,80 @@
+<html>
+<body>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="pako.js"></script>
+    <script type="text/javascript" src="snappy.min.js"></script>
+    <script type="text/javascript" src="dist/bundle.js"></script>
+    <script type="text/javascript" src="zstd-codec/js/example/dist/bundle.js"></script>
+    Input file
+    <input type="file" id="file" name="file" />
+    <!-- <p> Run compression 1000 times with </p> -->
+    <!-- <button onclick="handleCompress('snappy')">Compress Snappy</button> 
+    <button onclick="handleCompress('zstd')">Compress Zstd</button>
+    <button onclick="handleCompress('zlib')">Compress Zlib</button>  -->
+    <button onclick="handleSendGrpc()">Send gRPC request</button> 
+    <button onclick="handleSendJson()">Send JSON request</button>
+</body>
+
+<script>
+    const fileSelector = document.getElementById('file');
+    var fileContent
+    fileSelector.addEventListener('change', (event) => {
+        var reader = new FileReader();
+        reader.onload = () => {
+            var enc = new TextEncoder();
+            fileContent = enc.encode(reader.result)
+        }
+        reader.readAsBinaryString(event.target.files[0]);
+    });
+    
+    const handleCompress = (compression) => {
+        var start = performance.now();
+        var compressor
+        if (compression == 'snappy') {
+            compressor = snappyCompress
+        } else if (compression == 'zlib'){
+            compressor = zlibCompress
+        } else {
+            compressor = zstdCompress
+        }
+        for (let index = 0; index < 1000; index++) {
+            compressor(fileContent)
+            
+        }
+        var end = performance.now();
+        var duration = end - start;
+        alert("time: " + duration/1000)
+    }
+
+    const zstdCompress = (data) => {
+        ZstdCodec.run((zstd) => {
+            var simple = new zstd.Simple();
+            var result = simple.compress(data);
+        });
+    }
+    const snappyCompress = (data) => {
+        var compressed = SnappyJS.compress(data)
+    }
+
+    const zlibCompress = (data) => {
+        pako.deflate(data);
+    }
+
+    const handleSendGrpc = () => {
+        gRPC.run(fileContent)
+    }
+
+    const handleSendJson = () => {
+        let deviceInfoString = String.fromCharCode(...fileContent);
+        // let deviceInfo = JSON.parse(deviceInfoString);
+        return fetch(`http://localhost:5000/api/test`,{
+            method: 'POST',
+            body: deviceInfoString,
+            }).then((_res) =>{
+                console.log(_res)
+            });
+    }
+
+</script>
+
+</html>

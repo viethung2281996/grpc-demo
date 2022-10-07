@@ -1,0 +1,202 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "src/grpc/protobufs/user_tracking.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "CompressService"
+    },
+    {
+      "name": "DeviceService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "DeviceInfoIdentity": {
+      "type": "object",
+      "properties": {
+        "actionTime": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "sdk": {
+          "$ref": "#/definitions/v1Sdk"
+        },
+        "device": {
+          "$ref": "#/definitions/v1Device"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CompressionType": {
+      "type": "string",
+      "enum": [
+        "GZIP",
+        "SNAPPY"
+      ],
+      "default": "GZIP"
+    },
+    "v1Device": {
+      "type": "object",
+      "properties": {
+        "dId": {
+          "type": "string"
+        },
+        "tId": {
+          "type": "string"
+        },
+        "uId": {
+          "type": "string"
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "os": {
+          "$ref": "#/definitions/v1Os"
+        },
+        "network": {
+          "$ref": "#/definitions/v1Network"
+        },
+        "screen": {
+          "$ref": "#/definitions/v1Screen"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "web": {
+          "$ref": "#/definitions/v1Web"
+        }
+      }
+    },
+    "v1Network": {
+      "type": "object",
+      "properties": {
+        "cellular": {
+          "type": "boolean"
+        },
+        "bluetooth": {
+          "type": "boolean"
+        },
+        "wifi": {
+          "type": "boolean"
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Os": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ResponseCompress": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "v1Screen": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "height": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "v1Sdk": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Web": {
+      "type": "object",
+      "properties": {
+        "browser": {
+          "type": "string"
+        },
+        "device": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "orientation": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

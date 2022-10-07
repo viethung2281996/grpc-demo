@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+alembic = "*"
+tox = "*"
+dynaconf = "*"
+sqlalchemy = "*"
+flask-migrate = "*"
+marshmallow = "*"
+marshmallow-enum = "*"
+python-dotenv = "*"
+psycopg2 = "*"
+flask-restful = "*"
+flask = "==2.0.1"
+gunicorn = "*"
+flask-cors = "*"
+webargs = "*"
+flask-jwt-extended = "*"
+locust = "*"
+zstd = "*"
+confluent-kafka = "*"
+
+[dev-packages]
+flake8 = "*"
+
+[requires]
+python_version = "3.8"

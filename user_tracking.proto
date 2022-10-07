@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+enum CompressionType {
+    GZIP = 0;
+    SNAPPY = 1;
+}
+message RequestCompress {
+    CompressionType compression_type = 1;
+    bytes data = 2;
+}
+
+message ResponseCompress {
+    bytes data = 1;
+}
+
+message Sdk {
+    string code = 1;
+    string source = 2;
+    string name = 3;
+    string version = 4;
+}
+
+message Os {
+    string name = 1;
+    string version = 2;
+}
+
+message Network {
+    bool cellular = 1;
+    bool bluetooth = 2;
+    bool wifi = 3;
+    string address = 4;
+}
+
+message Screen {
+    uint32 width = 1;
+    uint32 height = 2;
+}
+
+message Web {
+    string browser = 1;
+    string device = 2;
+    string version = 3;
+    string orientation = 4;
+}
+
+message Device {
+    string d_id = 1;
+    string t_id = 2;
+    string u_id = 3;
+    string device_id = 4;
+    string profile_id = 5;
+    string type = 6;
+    string channel = 7;
+    Os os = 8;
+    Network network = 9;
+    Screen screen = 10;
+    string locale = 11;
+    string timezone = 12;
+    Web web = 13;
+}
+
+message DeviceInfo {
+    message Identity {
+        uint64 action_time = 1;
+        Sdk sdk = 2;
+        Device device = 3;
+    }
+
+    Identity identity = 1;
+}
+
+service CompressService {
+    rpc Compress(RequestCompress) returns (ResponseCompress);
+}
+
+service DeviceService {
+    rpc RegisterDevice(DeviceInfo) returns (Device);
+}

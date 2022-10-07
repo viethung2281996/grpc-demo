@@ -1,0 +1,42 @@
+{
+	"identity": {
+		"action_time": 1663236759170,
+		"sdk": {
+			"code": "m-web-test25-vt",
+			"source": "OpenCard",
+			"name": "SDK_WEB",
+			"version": "1.0.0"
+		},
+		"device": {
+			"d_id": "b26fb0fa-c7cd-4110-a299-00b9b657aa64",
+			"t_id": "1ded1563-e99b-13fa-f2c0-5220bef11e0a",
+			"u_id": "",
+			"device_id": "",
+			"profile_id": "",
+			"type": "desktop",
+			"channel": "website",
+			"os": {
+				"name": "Mac",
+				"version": "mac-os-x-15"
+			},
+			"network": {
+				"cellular": false,
+				"bluetooth": false,
+				"wifi": true,
+				"address": "127.0.0.1"
+			},
+			"screen": {
+				"width": 1440,
+				"height": 900
+			},
+			"locale": "vi-VN",
+			"timezone": "Asia/Saigon",
+			"web": {
+				"browser": "Chrome",
+				"device": "Macintosh",
+				"version": "105.0.0.0",
+				"orientation": "landscape"
+			}
+		}
+	}
+}

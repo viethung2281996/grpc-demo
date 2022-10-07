@@ -1,0 +1,13 @@
+[default]
+SQLALCHEMY_TRACK_MODIFICATIONS = false
+PROPAGATE_EXCEPTIONS = true
+
+API_DEFAULT_PAGE_SIZE = 10
+API_MAX_PAGE_SIZE = 50
+SQLALCHEMY_DATABASE_URI = 'postgresql://hungtv:@localhost:5432/fx'
+
+LOG_LEVEL = 'INFO'
+
+[development]
+
+SQLALCHEMY_DATABASE_URI = 'postgresql://hungtv:@localhost:5432/fx'
