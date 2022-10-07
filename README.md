@@ -23,13 +23,13 @@ FLASK_DEBUG=1
 ENV_FOR_DYNACONF=development
 
 ```
-# Run app
+# Run REST app
 
 ```
 flask run
 ```
 
-## Run gRPC backend
+## Run gRPC app
 Install envoy proxy
 ```
 https://www.envoyproxy.io/docs/envoy/latest/start/install
